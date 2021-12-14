@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const customer_r = require("./route/customer_r");
 const driver_r = require("./route/driver_r");
-// app.get("/", (req, res) => {
-//   res.json({ msg: `Hi Server!` });
-//   console.log("Hi Server!");
-// });
+app.get("/", (req, res) => {
+  res.json({ msg: `Hi Server!` });
+  console.log("Hi Server!");
+});
 app.use(bodyParser.json());
 app.use(expressFileUpload());
 app.use(cors());
