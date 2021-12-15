@@ -27,14 +27,6 @@ route.get("/clist", async (req, res) => {
   try {
     const result = await Customer.find();
     const data = res.json(result);
-    // Customer.count((err, count) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log(count);
-    //   }
-    // });
-    // console.log(result);
   } catch (err) {
     console.log(err);
   }
