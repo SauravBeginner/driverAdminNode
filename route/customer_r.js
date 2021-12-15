@@ -1,23 +1,29 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const Customer = require("../model/customer");
-
+const bcrypt = require("bcrypt");
 const route = express.Router();
 
 route.post("/cadd", async (req, res) => {
   try {
+    const salt = await bcrypt.genSalt(10);
+    const pwd = await bcrypt.hash(req.body.password, salt);
+    const cpwd = await bcrypt.hash(req.body.cpassword, salt);
     var obj = {
       fname: req.body.fname,
       lname: req.body.lname,
       phone: req.body.phone,
       mail: req.body.mail,
-      password: req.body.password,
-      cpassword: req.body.cpassword,
+      password: pwd,
+      cpassword: cpwd,
     };
-
-    const result = await Customer.create(obj);
-    res.json({ msg: `Customer added!` });
-    console.log("cusomer added!");
+    if (pwd != cpwd) {
+      console.log("Password must be same!");
+    } else {
+      const result = await Customer.create(obj);
+      res.json({ msg: `Customer added!` });
+      console.log("cusomer added!");
+    }
   } catch (err) {
     console.log(err);
   }

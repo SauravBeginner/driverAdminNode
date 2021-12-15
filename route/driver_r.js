@@ -6,6 +6,9 @@ const route = express.Router();
 
 route.post("/dadd", async (req, res) => {
   try {
+    const salt = await bcrypt.genSalt(10);
+    const pwd = await bcrypt.hash(req.body.password, salt);
+    const cpwd = await bcrypt.hash(req.body.cpassword, salt);
     var obj = {
       fname: req.body.fname,
       lname: req.body.lname,
@@ -18,10 +21,13 @@ route.post("/dadd", async (req, res) => {
       carType: req.body.carType,
       kyc: req.body.kyc,
     };
-
-    const result = await Driver.create(obj);
-    res.json({ msg: `Driver added!` });
-    console.log(result);
+    if (pwd != cpwd) {
+      console.log("Password must be same!");
+    } else {
+      const result = await Driver.create(obj);
+      res.json({ msg: `Driver added!` });
+      console.log(result);
+    }
   } catch (err) {
     console.log(err);
   }
