@@ -22,6 +22,7 @@ route.post("/dadd", async (req, res) => {
       kyc: req.body.kyc,
     };
     if (pwd != cpwd) {
+      res.json({ err: `Invalid` });
       console.log("Invalid");
     } else {
       const result = await Driver.create(obj);

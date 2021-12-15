@@ -18,6 +18,7 @@ route.post("/cadd", async (req, res) => {
       cpassword: cpwd,
     };
     if (pwd != cpwd) {
+      res.json({ err: `Invalid` });
       console.log("Invalid");
     } else {
       const result = await Customer.create(obj);
