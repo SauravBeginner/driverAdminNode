@@ -31,12 +31,12 @@ route.get("/dlist", async (req, res) => {
   try {
     var result = await Driver.find();
     const data = res.json(result);
-
     // console.log(result);
   } catch (err) {
     console.log(err);
   }
 });
+
 route.get("/dtotal", async (req, res) => {
   try {
     var result = await Driver.find();
