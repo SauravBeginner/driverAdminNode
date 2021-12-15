@@ -22,11 +22,11 @@ route.post("/dadd", async (req, res) => {
       kyc: req.body.kyc,
     };
     if (pwd != cpwd) {
-      console.log("Password must be same!");
+      console.log("Invalid");
     } else {
       const result = await Driver.create(obj);
       res.json({ msg: `Driver added!` });
-      // console.log(result);
+      console.log(result);
     }
   } catch (err) {
     console.log(err);

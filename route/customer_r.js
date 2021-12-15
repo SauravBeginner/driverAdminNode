@@ -18,7 +18,7 @@ route.post("/cadd", async (req, res) => {
       cpassword: cpwd,
     };
     if (pwd != cpwd) {
-      console.log("Password must be same!");
+      console.log("Invalid");
     } else {
       const result = await Customer.create(obj);
       res.json({ msg: `Customer added!` });
